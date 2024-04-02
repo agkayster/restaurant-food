@@ -1,5 +1,5 @@
 import Image from 'next/image';
 
 export default function Home() {
-	return <div>Hello Worlds</div>;
+	return <div>Hello Winds</div>;
 }
