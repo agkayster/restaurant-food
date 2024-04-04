@@ -9,7 +9,7 @@ const CountDown = dynamic(() => import('./CountDown'), {
 
 function OfferComponent() {
 	return (
-		<div className='flex flex-col md:flex-row bg-black h-screen'>
+		<div className='flex flex-col md:flex-row bg-black h-screen md:justify-between md:bg-[url("/offerBg.png")] md:h-[70vh]'>
 			{/* TEXT */}
 			<div className='flex-1 flex flex-col items-center justify-center gap-4 text-center p-6'>
 				<h1 className='text-white text-5xl font-bold'>
