@@ -11,8 +11,7 @@ const CategoryPage = () => {
 					href={`/product/${id}`}
 					key={id}
 					/* sm:w-1/2 means after small screen */
-					className='w-full h-[60vh] border-r-2 border-b-2 flex flex-col justify-between border-red-500 
-					sm:w-1/2 md:w-1/3 lg:w-1/4 p-4'>
+					className='w-full h-[60vh] border-r-2 border-b-2 flex flex-col justify-between group even:bg-fuchsia-50 border-red-500 sm:w-1/2 md:w-1/3 p-4'>
 					{/* IMAGE */}
 					{img && (
 						<div className='h-[80%] relative'>
@@ -27,8 +26,8 @@ const CategoryPage = () => {
 					{/* TEXT */}
 					<div className='h-[20%] flex items-center justify-between font-bold'>
 						<h1 className='text-xl uppercase p-1'>{title}</h1>
-						<h2>${price}</h2>
-						<button className='uppercase bg-red-500 text-white p-2 rounded-md'>
+						<h2 className='group-hover:hidden text-xl'>${price}</h2>
+						<button className='hidden uppercase group-hover:block bg-red-500 text-white p-2 rounded-md'>
 							Add to Cart
 						</button>
 					</div>
