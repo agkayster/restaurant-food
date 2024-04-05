@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Props = {
 	price: number;
@@ -8,15 +8,36 @@ type Props = {
 };
 
 export default function Price({ id, price, options }: Props) {
+	const [totalPrice, setTotalPrice] = useState(price);
+	const [quantity, setQuantity] = useState(1);
+	const [selectedItem, setSelectedItem] = useState(0);
+
+	useEffect(() => {
+		setTotalPrice(
+			quantity *
+				(options
+					? price + options[selectedItem].additionalPrice
+					: price)
+		);
+	}, [options, selectedItem, price, quantity]);
+
 	return (
 		<div className='flex flex-col gap-4 md:gap-8'>
-			<h2 className='text-2xl font-bold'>${price.toFixed(2)}</h2>
+			<h2 className='text-2xl font-bold'>${totalPrice.toFixed(2)}</h2>
 			{/* OPTIONS */}
 			<div className='flex gap-4'>
-				{options?.map(({ title, additionalPrice }) => (
+				{options?.map(({ title, additionalPrice }, index) => (
 					<button
 						className='ring-1 ring-red-400 p-2 rounded-md w-full text-red-500'
-						key={title}>
+						style={{
+							backgroundColor:
+								selectedItem === index
+									? 'rgb(248 113 113)'
+									: 'white',
+							color: selectedItem === index ? 'white' : 'red',
+						}}
+						key={title}
+						onClick={() => setSelectedItem(index)}>
 						{title}
 					</button>
 				))}
@@ -28,11 +49,27 @@ export default function Price({ id, price, options }: Props) {
 					<span>Quantity</span>
 					<div className='flex gap-4 items-center'>
 						{/* DECREASE */}
-						<button>{'<'}</button>
+						<button
+							type='button'
+							onClick={() =>
+								setQuantity((prev) => (prev > 1 ? prev - 1 : 1))
+							}>
+							{'<'}
+						</button>
 						{/* NUMBER */}
-						<span>1</span>
+						<span className='w-1 flex items-center justify-center'>
+							{quantity}
+						</span>
 						{/* INCREASE */}
-						<button>{'>'}</button>
+						<button
+							type='button'
+							onClick={() =>
+								setQuantity((prev) =>
+									prev === 9 ? 9 : prev + 1
+								)
+							}>
+							{'>'}
+						</button>
 					</div>
 				</div>
 				{/* CART BUTTON */}
