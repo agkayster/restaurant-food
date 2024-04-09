@@ -4,13 +4,14 @@ import Image from 'next/image';
 
 import Menu from './Menu';
 import CartIcon from './CartIcon';
+import UserLinks from './UserLinks';
 
 const Navbar = () => {
 	// Temporary
-	const user = false;
+	// const user = false;
 
 	return (
-		<div className='h-12 text-red-500 p-4 flex flex-row items-center justify-between border-b-2 border-b-red-500 uppercase md:h-24 lg:px-10 xl:px-20'>
+		<div className='h-12 text-red-500 p-4 flex flex-row items-center justify-between border-b-2 border-b-red-500 uppercase md:h-24 lg:px-10 xl:px-16'>
 			{/* LEFT LINKS */}
 			<div className='hidden md:flex gap-4 flex-1'>
 				<Link href='/'>Home</Link>
@@ -31,11 +32,7 @@ const Navbar = () => {
 					<Image src='/phone.png' alt='' width={20} height={20} />
 					<span>+234-8022229876</span>
 				</div>
-				{!user ? (
-					<Link href='/login'>Login</Link>
-				) : (
-					<Link href='/orders'>Orders</Link>
-				)}
+				<UserLinks />
 				<CartIcon />
 			</div>
 		</div>

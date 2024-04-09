@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import CartIcon from './CartIcon';
+import { useSession } from 'next-auth/react';
 
 const links = [
 	{
@@ -30,8 +31,10 @@ const links = [
 const Menu = () => {
 	const [open, setOpen] = useState(false);
 
+	const { status, data } = useSession();
+
 	/* Temporary */
-	const user = false;
+	// const user = false;
 
 	const handleMobileBurgerResponse = () => {
 		setOpen(!open);
@@ -68,7 +71,7 @@ const Menu = () => {
 							{title}
 						</Link>
 					))}
-					{!user ? (
+					{status === 'unauthenticated' ? (
 						<Link href='/login' onClick={() => setOpen(false)}>
 							Login
 						</Link>
