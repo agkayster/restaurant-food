@@ -19,7 +19,7 @@ const Navbar = () => {
 				<Link href='/contact'>Contact</Link>
 			</div>
 			{/* LOGO */}
-			<div className='text-lg font-semibold flex-1 md:text-center'>
+			<div className='text-lg font-semibold flex-none md:text-center'>
 				<Link href='/'>blueflame</Link>
 			</div>
 			{/* MOBILE MENU */}

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import CartIcon from './CartIcon';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 const links = [
 	{
@@ -76,9 +76,13 @@ const Menu = () => {
 							Login
 						</Link>
 					) : (
-						<Link href='/orders' onClick={() => setOpen(false)}>
-							Orders
-						</Link>
+						<div className='flex flex-col gap-6'>
+							<Link href='/orders' onClick={() => setOpen(false)}>
+								Orders
+							</Link>
+
+							<span className='cursor-pointer' onClick={() => signOut()}>Logout</span>
+						</div>
 					)}
 					<Link href='/cart' onClick={() => setOpen(false)}>
 						<CartIcon />

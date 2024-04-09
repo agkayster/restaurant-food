@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 const LoginPage = () => {
 	const { data, status } = useSession();
 
+	console.log('get status =>', status);
+
 	const router = useRouter();
 
 	if (status === 'loading') {
@@ -16,10 +18,6 @@ const LoginPage = () => {
 
 	if (status === 'authenticated') {
 		router.push('/');
-	}
-
-	if (status === 'unauthenticated') {
-		return;
 	}
 
 	return (

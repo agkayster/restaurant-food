@@ -1,5 +1,5 @@
 'use client';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import Link from 'next/link';
 
@@ -11,7 +11,12 @@ const UserLinks = () => {
 			{status === 'unauthenticated' ? (
 				<Link href='/login'>Login</Link>
 			) : (
-				<Link href='/orders'>Orders</Link>
+				<div className='flex flex-row'>
+					<Link href='/orders'>Orders</Link>
+					<span className='cursor-pointer ml-4' onClick={() => signOut()}>
+						Logout
+					</span>
+				</div>
 			)}
 		</div>
 	);
