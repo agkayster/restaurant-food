@@ -30,7 +30,7 @@ model Product {
   title      String
   desc       String
   img        String?
-  product    Decimal
+  price      Decimal  @default(0)
   isFeatured Boolean  @default(false)
   options    Json[]
   category   Category @relation(fields: [catSlug], references: [slug])

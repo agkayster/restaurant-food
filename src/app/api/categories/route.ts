@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client';
+import prisma from '@/utils/connect';
 import { NextResponse } from 'next/server';
 
 // WE FETCH ALL THE CATEGORIES FROM PRISMA STUDIO
-
-const prisma = new PrismaClient();
 
 export const GET = async () => {
 	try {
