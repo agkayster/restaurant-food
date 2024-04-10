@@ -1,6 +1,29 @@
+'use client';
 import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { OrderType } from '@/types/types';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 const OrdersPage = () => {
+	const { data: session, status } = useSession();
+
+	const router = useRouter();
+
+	if (status === 'unauthenticated') {
+		router.push('/');
+	}
+
+	const { isPending, error, data } = useQuery({
+		queryKey: ['orders'],
+		queryFn: () =>
+			fetch('http://localhost:3000/api/orders').then((res) => res.json()),
+	});
+
+	if (isPending || status === 'loading') return 'Loading...';
+
+	if (error) return `An error has occurred:  ${error.message}`;
+
 	return (
 		<div className='p-4 lg:px-10 xl:p-20'>
 			<table className='w-full border-separate border-spacing-3'>
@@ -14,42 +37,38 @@ const OrdersPage = () => {
 					</tr>
 				</thead>
 				<tbody className=''>
-					<tr className='text-sm md:text-base bg-red-50'>
-						<td className='hidden md:block py-6 px-1'>4537678</td>
-						<td className='py-6 px-1'>22-04-2024</td>
-						<td className='py-6 px-1'>39.90</td>
-						<td className='hidden md:block py-6 px-1'>
-							Big Burger menu (2), Veggie Pizza (2), Coca Cola 1L
-							(2)
-						</td>
-						<td className='py-6 px-1'>
-							On the way (approx, 10min)...
-						</td>
-					</tr>
-					<tr className='text-sm md:text-base odd:bg-gray-100'>
-						<td className='hidden md:block py-6 px-1'>4537678</td>
-						<td className='py-6 px-1'>22-04-2024</td>
-						<td className='py-6 px-1'>39.90</td>
-						<td className='hidden md:block py-6 px-1'>
-							Big Burger menu (2), Veggie Pizza (2), Coca Cola 1L
-							(2)
-						</td>
-						<td className='py-6 px-1'>
-							On the way (approx, 10min)...
-						</td>
-					</tr>
-					<tr className='text-sm md:text-base odd:bg-gray-100'>
-						<td className='hidden md:block py-6 px-1'>4537678</td>
-						<td className='py-6 px-1'>22-04-2024</td>
-						<td className='py-6 px-1'>39.90</td>
-						<td className='hidden md:block py-6 px-1'>
-							Big Burger menu (2), Veggie Pizza (2), Coca Cola 1L
-							(2)
-						</td>
-						<td className='py-6 px-1'>
-							On the way (approx, 10min)...
-						</td>
-					</tr>
+					{data &&
+						data.map(
+							({
+								id,
+								createdAt,
+								price,
+								products,
+								status,
+								intent_id,
+								userEmail,
+							}: OrderType) => (
+								<tr
+									key={id}
+									className='text-sm md:text-base bg-red-50'>
+									<td className='hidden md:block py-6 px-1'>
+										{id}
+									</td>
+									<td className='py-6 px-1'>
+										{createdAt.toString()}
+									</td>
+									<td className='py-6 px-1'>{price}</td>
+									{products.map(({ title }) => (
+										<td
+											key={title}
+											className='hidden md:block py-6 px-1'>
+											{title}
+										</td>
+									))}
+									<td className='py-6 px-1'>{status}</td>
+								</tr>
+							)
+						)}
 				</tbody>
 			</table>
 		</div>
