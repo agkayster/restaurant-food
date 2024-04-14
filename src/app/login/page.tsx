@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { signIn, useSession } from 'next-auth/react';
@@ -12,12 +12,14 @@ const LoginPage = () => {
 
 	const router = useRouter();
 
+	useEffect(() => {
+		if (status === 'authenticated') {
+			router.push('/');
+		}
+	});
+
 	if (status === 'loading') {
 		return <p>Loading...</p>;
-	}
-
-	if (status === 'authenticated') {
-		router.push('/');
 	}
 
 	return (

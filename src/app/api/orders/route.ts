@@ -16,11 +16,11 @@ export const GET = async (req: NextRequest) => {
 				});
 			}
 			const orders = await prisma.order.findMany({
-        where: {
-          userEmail: session.user.email!,
+				where: {
+					userEmail: session.user.email!,
 				},
 			});
-      console.log('get orders =>', orders);
+
 			return new NextResponse(JSON.stringify(orders), {
 				status: 200,
 			});
