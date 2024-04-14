@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { OrderType } from '@/types/types';
 import { useSession } from 'next-auth/react';
@@ -10,9 +10,11 @@ const OrdersPage = () => {
 
 	const router = useRouter();
 
-	if (status === 'unauthenticated') {
-		router.push('/');
-	}
+	useEffect(() => {
+		if (status === 'unauthenticated') {
+			router.push('/');
+		}
+	});
 
 	const { isPending, error, data } = useQuery({
 		queryKey: ['orders'],

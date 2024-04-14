@@ -33,7 +33,9 @@ const Navbar = () => {
 					<span>+234-8022229876</span>
 				</div>
 				<UserLinks />
-				<CartIcon />
+				<Link href='/cart'>
+					<CartIcon />
+				</Link>
 			</div>
 		</div>
 	);
