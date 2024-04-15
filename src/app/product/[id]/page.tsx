@@ -1,27 +1,61 @@
 import Price from '@/components/Price';
-import { singleProduct } from '@/data';
+import { ProductType } from '@/types/types';
 import Image from 'next/image';
 import React from 'react';
 
-const SingleProduct = () => {
-	const { id, title, desc, price, img, options } = singleProduct;
+type Props = {
+	params: { id: string };
+};
+
+const getData = async (id: string) => {
+	const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+		cache: 'no-store',
+	});
+
+	if (!res.ok) {
+		throw new Error('Failed!');
+	}
+
+	return res.json();
+};
+
+const SingleProduct = async ({ params }: Props) => {
+	console.log('get params id =>', params);
+	const singleProduct: ProductType = await getData(params?.id);
+	// const {
+	// 	id: singleProdId,
+	// 	title,
+	// 	desc,
+	// 	price,
+	// 	img,
+	// 	options,
+	// } = singleProduct;
 
 	return (
-		<div
-			className='p-4 lg:px-10 xl:px-20 flex flex-col justify-around h-screen
-			 text-red-500 md:flex-row md:items-center md:gap-4 '>
+		<div className='p-4 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-red-500 md:flex-row md:gap-8 md:items-center relative'>
 			{/* IMAGE */}
-			<div className='relative h-1/2 w-full md:h-[70%] md:justify-center'>
-				{img && (
-					<Image src={img} alt='' fill className='object-contain' />
+			<div className='relative h-1/2 w-full md:h-[70%]'>
+				{singleProduct.img && (
+					<Image
+						src={singleProduct.img}
+						alt=''
+						fill
+						className='object-contain'
+					/>
 				)}
 			</div>
 			{/* TEXT */}
-			<div className='h-1/2 flex flex-col gap-4 md:gap-8 md:h-[70%] md:justify-center'>
-				<h1 className='text-2xl font-bold uppercase'>{title}</h1>
-				<p>{desc}</p>
+			<div className='h-1/2 flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8 border-2 border-red-500'>
+				<h1 className='text-2xl font-bold uppercase'>
+					{singleProduct.title}
+				</h1>
+				<p>{singleProduct.desc}</p>
 				{/* price gave an lint error for type, so in Price component we set the Props type */}
-				<Price price={price} options={options} id={id} />
+				{/* <Price
+					price={singleProduct.price}
+					options={singleProduct.options}
+					id={singleProduct.id}
+				/> */}
 			</div>
 		</div>
 	);
