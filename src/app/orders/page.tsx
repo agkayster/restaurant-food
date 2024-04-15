@@ -85,7 +85,11 @@ const OrdersPage = () => {
 							}: OrderType) => (
 								<tr
 									key={id}
-									className='text-sm md:text-base bg-red-50'>
+									className={`text-sm md:text-base ${
+										status === 'delivered'
+											? 'bg-white'
+											: 'bg-red-50'
+									} `}>
 									<td className='hidden md:block py-6 px-1'>
 										{id}
 									</td>
