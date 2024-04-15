@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { OrderType } from '@/types/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -26,19 +26,36 @@ const OrdersPage = () => {
 			fetch('http://localhost:3000/api/orders').then((res) => res.json()),
 	});
 
-	const handleSubmit = (
-		e: React.FormEvent<HTMLFormElement>,
-		orderId: string
-	) => {
+	const queryClient = useQueryClient();
+
+	/* use this to update our use query fetch request above and also refresh the page to see the update */
+	const mutation = useMutation({
+		mutationFn: ({ id, status }: { id: string; status: string }) => {
+			return fetch(`http://localhost:3000/api/orders/${id}`, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(status),
+			});
+		},
+		onSuccess() {
+			queryClient.invalidateQueries({ queryKey: ['orders'] });
+		},
+	});
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>, id: string) => {
 		e.preventDefault();
 		const form = e.target as HTMLFormElement;
 		const input = form.elements[0] as HTMLInputElement;
 		const status = input.value;
+
+		mutation.mutate({ id, status });
 	};
 
 	if (isPending || status === 'loading') return 'Loading...';
 
-	if (error) return `An error has occurred:  ${error.message}`;
+	// if (error) return `An error has occurred:  ${error.message}`;
 
 	return (
 		<div className='p-4 lg:px-10 xl:p-20'>
