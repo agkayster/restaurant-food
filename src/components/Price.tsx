@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 type Props = {
 	price: number;
-	id: number;
+	id: string;
 	options?: { title: string; additionalPrice: number }[];
 };
 
@@ -23,7 +23,7 @@ export default function Price({ id, price, options }: Props) {
 
 	return (
 		<div className='flex flex-col gap-4 md:gap-8'>
-			<h2 className='text-2xl font-bold'>${totalPrice.toFixed(2)}</h2>
+			<h2 className='text-2xl font-bold'>${totalPrice}</h2>
 			{/* OPTIONS */}
 			<div className='flex gap-4'>
 				{options?.map(({ title, additionalPrice }, index) => (
