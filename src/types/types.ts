@@ -20,8 +20,17 @@ export type OrderType = {
 	id: string;
 	createdAt: Date;
 	price: number;
-	products: { title: string }[];
+	products: CartItemType[];
 	intent_id?: String;
 	userEmail: string;
 	status: string;
+};
+
+export type CartItemType = {
+	id: string;
+	title: string;
+	img?: string;
+	price: number;
+	optionTitle?: String;
+	quantity: number;
 };
