@@ -51,11 +51,11 @@ const SingleProduct = async ({ params }: Props) => {
 				</h1>
 				<p>{singleProduct.desc}</p>
 				{/* price gave an lint error for type, so in Price component we set the Props type */}
-				{/* <Price
+				<Price
 					price={singleProduct.price}
 					options={singleProduct.options}
 					id={singleProduct.id}
-				/> */}
+				/>
 			</div>
 		</div>
 	);
