@@ -34,7 +34,7 @@ const SingleProduct = async ({ params }: Props) => {
 	return (
 		<div className='p-4 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-red-500 md:flex-row md:gap-8 md:items-center relative'>
 			{/* IMAGE */}
-			<div className='relative h-1/2 w-full md:h-[70%]'>
+			<div className='relative h-1/2 w-full md:h-[70%] md:w-1/2'>
 				{singleProduct.img && (
 					<Image
 						src={singleProduct.img}
@@ -45,7 +45,7 @@ const SingleProduct = async ({ params }: Props) => {
 				)}
 			</div>
 			{/* TEXT */}
-			<div className='h-1/2 flex flex-col gap-4 md:h-[70%] md:justify-center md:gap-6 xl:gap-8 border-2 border-red-500'>
+			<div className='h-1/2 flex flex-col gap-4 md:w-1/2 md:h-[70%] md:justify-center md:gap-6 xl:gap-8'>
 				<h1 className='text-2xl font-bold uppercase'>
 					{singleProduct.title}
 				</h1>
