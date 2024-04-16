@@ -12,10 +12,12 @@ export default function Price({ id, price, options }: Props) {
 	const [quantity, setQuantity] = useState(1);
 	const [selectedItem, setSelectedItem] = useState(0);
 
+	console.log("get options =>", options)
+
 	useEffect(() => {
 		setTotalPrice(
 			quantity *
-				(options
+				(options?.length
 					? price + options[selectedItem].additionalPrice
 					: price)
 		);
@@ -26,7 +28,7 @@ export default function Price({ id, price, options }: Props) {
 			<h2 className='text-2xl font-bold'>${totalPrice}</h2>
 			{/* OPTIONS */}
 			<div className='flex gap-4'>
-				{options?.map(({ title, additionalPrice }, index) => (
+				{options?.length && options?.map(({ title, additionalPrice }, index) => (
 					<button
 						className='ring-1 ring-red-400 p-2 rounded-md w-full text-red-500'
 						style={{
