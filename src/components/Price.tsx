@@ -13,6 +13,11 @@ export default function Price({ product }: { product: ProductType }) {
 
 	const { addToCart } = useCartStore();
 
+	/* add this to all pages where we use "useCartStore" */
+	// useEffect(() => {
+	// 	useCartStore.persist.rehydrate();
+	// }, []);
+
 	useEffect(() => {
 		setTotalPrice(
 			quantity *
@@ -33,7 +38,7 @@ export default function Price({ product }: { product: ProductType }) {
 			}),
 			quantity: quantity,
 		});
-		toast.success("Product has been added to the cart!")
+		toast.success('Product has been added to the cart!');
 	};
 
 	return (
@@ -98,3 +103,6 @@ export default function Price({ product }: { product: ProductType }) {
 		</div>
 	);
 }
+
+
+

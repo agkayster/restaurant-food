@@ -1,10 +1,17 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import { useCartStore } from '@/utils/store';
 
 const CartPage = () => {
 	const { products, removeFromCart, totalPrice, totalItems } = useCartStore();
+
+	console.log('get products from store =>', products);
+
+	/* add this to all pages where we use "useCartStore" */
+	// useEffect(() => {
+	// 	useCartStore.persist.rehydrate();
+	// }, []);
 
 	return (
 		<div className='h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-red-500 lg:flex-row'>
@@ -14,7 +21,7 @@ const CartPage = () => {
 				{products &&
 					products.map((item) => (
 						<div
-							key={item.id}
+							key={item.optionTitle!}
 							className='flex items-center justify-between mb-4'>
 							{item.img && (
 								<div className='relative'>
@@ -28,7 +35,7 @@ const CartPage = () => {
 							)}
 							<div>
 								<h1 className='uppercase font-bold text-xl'>
-									{item.title}
+									{item.title} X{item.quantity}
 								</h1>
 								<span>{item.optionTitle}</span>
 							</div>
@@ -40,33 +47,15 @@ const CartPage = () => {
 							</span>
 						</div>
 					))}
-				{/* <div className='flex items-center justify-between mb-4'>
-					<div className='relative'>
-						<Image
-							src='/temporary/p1.png'
-							alt='alt'
-							width={100}
-							height={100}
-						/>
-					</div>
-					<div>
-						<h1 className='uppercase font-bold text-xl'>
-							Sicilian
-						</h1>
-						<span>Large</span>
-					</div>
-					<h2 className='font-bold text-lg'>$29.40</h2>
-					<span className='cursor-pointer'>X</span>
-				</div> */}
 			</div>
 
 			{/* PAYMENT TEXT */}
 			<div
 				className='h-1/2 flex flex-col gap-4 justify-center p-4 bg-fuchsia-50 lg:w-1/3 lg:h-full 2xl:w-1/2 
 			lg:px-10 xl:px-20 2xl:text-xl 2xl:gap-6'>
-				<div className='flex justify-between'>
+				<div className='flex flex-row justify-between'>
 					<span className=''>Subtotal ({totalItems} items)</span>
-					<span className=''>${totalPrice}</span>
+					<span className=''>${+totalPrice.toFixed(2)}</span>
 				</div>
 				<div className='flex justify-between'>
 					<span className=''>Service Cost</span>
@@ -79,7 +68,9 @@ const CartPage = () => {
 				<hr className='my-2' />
 				<div className='flex justify-between'>
 					<span className=''>Total (INCL. VAT)</span>
-					<span className='font-bold'>${totalPrice + 0}</span>
+					<span className='font-bold'>
+						${+totalPrice.toFixed(2) + 0}
+					</span>
 				</div>
 				<button className='bg-red-500 text-white p-3 rounded-md uppercase w-1/2 self-end'>
 					Checkout
