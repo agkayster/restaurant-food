@@ -9,9 +9,9 @@ const CartPage = () => {
 	console.log('get products from store =>', products);
 
 	/* add this to all pages where we use "useCartStore" */
-	// useEffect(() => {
-	// 	useCartStore.persist.rehydrate();
-	// }, []);
+	useEffect(() => {
+		useCartStore.persist.rehydrate();
+	}, []);
 
 	return (
 		<div className='h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-red-500 lg:flex-row'>
