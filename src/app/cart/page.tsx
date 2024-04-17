@@ -6,8 +6,6 @@ import { useCartStore } from '@/utils/store';
 const CartPage = () => {
 	const { products, removeFromCart, totalPrice, totalItems } = useCartStore();
 
-	console.log('get products from store =>', products);
-
 	/* add this to all pages where we use "useCartStore" */
 	useEffect(() => {
 		useCartStore.persist.rehydrate();
@@ -21,7 +19,7 @@ const CartPage = () => {
 				{products &&
 					products.map((item) => (
 						<div
-							key={item.optionTitle!}
+							key={item.optionTitle as string}
 							className='flex items-center justify-between mb-4'>
 							{item.img && (
 								<div className='relative'>

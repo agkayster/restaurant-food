@@ -18,10 +18,8 @@ export const useCartStore = create(
 
 			/* we take the item and push into our products array, everything goes into the cart */
 			addToCart(item) {
-				console.log('what is item =>', item);
 				/* we are getting the products inside the state */
 				const products = get().products;
-				console.log('get state products =>', products);
 
 				/* check whether the product(s) exist in state */
 				const productsInState = products.find(
@@ -41,11 +39,11 @@ export const useCartStore = create(
 							: item
 					);
 
-					console.log(
-						'get state after updated products =>',
-						products
-					);
-					console.log('get updated products =>', updatedProducts);
+					// console.log(
+					// 	'get state after updated products =>',
+					// 	products
+					// );
+					// console.log('get updated products =>', updatedProducts);
 					let finalUpdatedProducts: any;
 					for (const prod of products) {
 						for (const ele of updatedProducts) {
@@ -61,7 +59,7 @@ export const useCartStore = create(
 							}
 						}
 					}
-					console.log('get new updated =>', finalUpdatedProducts);
+					// console.log('get new updated =>', finalUpdatedProducts);
 
 					/* we add "finalUpdatedProducts" into state */
 					set((state) => ({
