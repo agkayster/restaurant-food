@@ -16,7 +16,7 @@ export const useCartStore = create(
 			totalItems: INITIAL_STATE.totalItems,
 			totalPrice: INITIAL_STATE.totalPrice,
 
-			// 			/* we take the item and push into our products array, everything goes into the cart */
+			/* we take the item and push into our products array, everything goes into the cart */
 			addToCart(item) {
 				console.log('what is item =>', item);
 				/* we are getting the products inside the state */

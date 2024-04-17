@@ -8,9 +8,9 @@ const CartIcon = () => {
 	const { totalItems } = useCartStore();
 
 	/* add this to all pages where we use "useCartStore" */
-	// useEffect(() => {
-	// 	useCartStore.persist.rehydrate();
-	// }, []);
+	useEffect(() => {
+		useCartStore.persist.rehydrate();
+	}, []);
 
 	return (
 		<div className='flex gap-4 items-center'>
