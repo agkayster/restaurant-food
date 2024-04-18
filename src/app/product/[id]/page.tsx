@@ -1,4 +1,4 @@
-import DeleteBtn from '@/components/DeleteBtn';
+import DeleteButton from '@/components/DeleteBtn';
 import Price from '@/components/Price';
 import { ProductType } from '@/types/types';
 import Image from 'next/image';
@@ -34,7 +34,7 @@ const SingleProduct = async ({ params }: Props) => {
 
 	return (
 		<div className='p-4 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-red-500 md:flex-row md:gap-8 md:items-center relative'>
-			<DeleteBtn />
+			<DeleteButton id={singleProduct.id} />
 			{/* IMAGE */}
 			<div className='relative h-1/2 w-full md:h-[70%] md:w-1/2'>
 				{singleProduct.img && (
