@@ -96,7 +96,9 @@ const OrdersPage = () => {
 									<td className='py-6 px-1'>
 										{createdAt.toString().slice(0, 10)}
 									</td>
-									<td className='py-6 px-1'>{price}</td>
+									<td className='py-6 px-1'>
+										{Number(price).toFixed(2)}
+									</td>
 									{products.map(({ title }) => (
 										<td
 											key={title}
