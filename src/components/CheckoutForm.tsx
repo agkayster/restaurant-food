@@ -5,11 +5,13 @@ import {
 	useStripe,
 	useElements,
 } from '@stripe/react-stripe-js';
+import AddressForm from './AddressForm';
 
 const CheckoutForm = () => {
 	const stripe = useStripe();
 	const elements = useElements();
 
+	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState<string | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean | null>(false);
 
@@ -83,29 +85,42 @@ const CheckoutForm = () => {
 	// 	layout: 'tabs',
 	// };
 	return (
-		<div>
-			<form id='payment-form' onSubmit={handleSubmit}>
-				<PaymentElement
-					id='payment-element'
-					options={{
-						layout: 'tabs',
-					}}
+		<form
+			id='payment-form'
+			onSubmit={handleSubmit}
+			className='min-h-[calc(100vh-6rem)] md:min-h-[calc(100vh-15rem)] p-4 lg:px-20 xl:px-40 flex flex-col gap-8'>
+			<div className='mb-2 font-light'>
+				<label>Email</label>
+				<input
+					type='email'
+					value={email}
+					placeholder='Email'
+					className='w-full border-2 h-12 rounded-md p-4 shadow-md'
+					onChange={(e) => setEmail(e.target.value)}
 				/>
-				<button
-					disabled={isLoading || !stripe || !elements}
-					id='submit'>
-					<span id='button-text'>
-						{isLoading ? (
-							<div className='spinner' id='spinner'></div>
-						) : (
-							'Pay now'
-						)}
-					</span>
-				</button>
-				{/* Show any error or success messages */}
-				{message && <div id='payment-message'>{message}</div>}
-			</form>
-		</div>
+			</div>
+			<PaymentElement
+				id='payment-element'
+				options={{
+					layout: 'tabs',
+				}}
+			/>
+			<AddressForm />
+			<button
+				disabled={isLoading || !stripe || !elements}
+				id='submit'
+				className='bg-red-500 text-white p-4 rounded-md w-28'>
+				<span id='button-text'>
+					{isLoading ? (
+						<div className='spinner' id='spinner'></div>
+					) : (
+						'Pay now'
+					)}
+				</span>
+			</button>
+			{/* Show any error or success messages */}
+			{message && <div id='payment-message'>{message}</div>}
+		</form>
 	);
 };
 
