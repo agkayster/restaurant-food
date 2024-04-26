@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 const CartPage = () => {
 	const { products, removeFromCart, totalPrice, totalItems } = useCartStore();
 
-	const { data: session } = useSession();
+	const { data: session, status } = useSession();
 
 	const router = useRouter();
 
@@ -17,8 +17,9 @@ const CartPage = () => {
 		useCartStore.persist.rehydrate();
 	}, []);
 
-	const handleCheckout = async () => {
+	status === 'unauthenticated' && router.push('/');
 
+	const handleCheckout = async () => {
 		/* check if user is signed on */
 		if (!session) {
 			router.push('/');

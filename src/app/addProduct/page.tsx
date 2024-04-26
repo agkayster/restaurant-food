@@ -12,6 +12,8 @@ type OptionType = {
 const AddNewProduct = () => {
 	const { data: session, status } = useSession();
 
+	const [isFeatured, setIsFeatured] = useState<string>('no');
+
 	/* form inputs */
 	const [inputs, setInputs] = useState<any>({
 		title: '',
@@ -58,10 +60,11 @@ const AddNewProduct = () => {
 		});
 	};
 
-	/** upload image API function to cloudinary */
+	/* upload image API function to cloudinary */
 	const upload = async () => {
 		const data = new FormData();
 
+		/* get our file from state */
 		data.append('file', file!);
 
 		/* upload preset is your cloudinary folder name */
@@ -71,10 +74,6 @@ const AddNewProduct = () => {
 			'https://api.cloudinary.com/v1_1/ejikedinary/image/upload',
 			{
 				method: 'POST',
-				// headers: {
-				// 	'Access-Control-Allow-Headers': 'Content-Type',
-				// 	'Content-Type': 'multipart/form-data',
-				// },
 				body: data,
 			}
 		);
@@ -85,13 +84,22 @@ const AddNewProduct = () => {
 
 	const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const target = e.target as HTMLInputElement;
+
+		/* take the first file which is our image from the list of files */
 		const item = (target.files as FileList)[0];
+
 		setFile(item);
 	};
 
 	const handleAddOption = () => {
 		/* instead of using spread "options", use spread "prev" */
 		setOptions((prev) => [...prev, option]);
+	};
+
+	const handleIsFeaturedChange = (
+		e: React.ChangeEvent<HTMLSelectElement>
+	) => {
+		setIsFeatured(e.target.value as any);
 	};
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -103,10 +111,12 @@ const AddNewProduct = () => {
 
 			const res = await fetch('http://localhost:3000/api/products', {
 				method: 'POST',
+				/* converting all the data in our body to string */
 				body: JSON.stringify({
 					/* set our "img" field which is a string in our database to "url" */
 					img: url,
 					...inputs,
+					isFeatured: isFeatured === 'yes' ? true : false,
 					options,
 				}),
 			});
@@ -118,12 +128,12 @@ const AddNewProduct = () => {
 		}
 	};
 
-	console.log('get options state =>', options);
+	console.log('get is feature =>', isFeatured);
 
 	return (
 		<div className='p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center text-red-500'>
 			<form
-				className='flex flex-wrap gap-6 h-full overflow-y-auto px-2'
+				className='flex flex-wrap gap-6 h-full overflow-y-auto px-2 md:px-4'
 				onSubmit={handleSubmit}>
 				<h1 className='text-4xl mb-2 text-gray-300 font-bold'>
 					Add New Product
@@ -190,6 +200,18 @@ const AddNewProduct = () => {
 						value={inputs.catSlug || ''}
 						onChange={handleInputChange}
 					/>
+				</div>
+				<div className='w-full flex flex-col gap-2'>
+					<label htmlFor='isFeatured' className='text-sm'>
+						Is this Featured?
+					</label>
+					<select
+						id='isFeatured'
+						onChange={handleIsFeaturedChange}
+						className='ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none'>
+						<option value='no'>No</option>
+						<option value='yes'>Yes</option>
+					</select>
 				</div>
 				<div className='w-full flex flex-col gap-2'>
 					<label className='text-sm'>Options</label>
