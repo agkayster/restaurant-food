@@ -11,7 +11,7 @@ const OrdersPage = () => {
 	const { data: session, status } = useSession();
 
 	/* shows details of the logged in user */
-	console.log('get session in orders =>', session);
+	console.log('get status in orders =>', status);
 
 	const router = useRouter();
 
@@ -19,7 +19,7 @@ const OrdersPage = () => {
 		if (status === 'unauthenticated') {
 			router.push('/');
 		}
-	});
+	}, [status, router]);
 
 	const { isPending, error, data } = useQuery({
 		queryKey: ['orders'],
@@ -72,8 +72,9 @@ const OrdersPage = () => {
 					</tr>
 				</thead>
 				<tbody className=''>
-					{data &&
-						data.map(
+					{/* when the left hand side is null execute the right hand side */}
+					{(data ?? []).length > 0 &&
+						(data ?? []).map(
 							({
 								id,
 								createdAt,

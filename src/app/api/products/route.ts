@@ -16,6 +16,7 @@ export const GET = async (req: NextRequest) => {
 			},
 		});
 
+		/* converts all our data into a string including numbers */
 		return new NextResponse(JSON.stringify(products), {
 			status: 200,
 		});
@@ -31,7 +32,6 @@ export const GET = async (req: NextRequest) => {
 /* CREATE PRODUCTS */
 export const POST = async (req: NextRequest) => {
 	const session = await getAuthSession();
-	const allowedOrigin = req.headers.get('origin');
 
 	/* if user is signed on */
 	if (session) {
@@ -43,6 +43,8 @@ export const POST = async (req: NextRequest) => {
 				const product = await prisma.product.create({
 					data: body,
 				});
+
+				/* converts all our data into a string including numbers */
 				return new NextResponse(JSON.stringify(product), {
 					status: 201,
 				});

@@ -22,7 +22,7 @@ export default function Price({ product }: { product: ProductType }) {
 		setTotalPrice(
 			quantity *
 				(options?.length
-					? +price + options[selectedItem].additionalPrice
+					? +price + Number(options[selectedItem].additionalPrice)
 					: +price)
 		);
 	}, [options, selectedItem, price, quantity]);
@@ -43,7 +43,7 @@ export default function Price({ product }: { product: ProductType }) {
 
 	return (
 		<div className='flex flex-col gap-4 md:gap-8'>
-			<h2 className='text-2xl font-bold'>${totalPrice}</h2>
+			<h2 className='text-2xl font-bold'>${Number(totalPrice).toFixed(2)}</h2>
 			{/* OPTIONS */}
 			<div className='flex gap-4'>
 				{options?.length &&
@@ -103,6 +103,3 @@ export default function Price({ product }: { product: ProductType }) {
 		</div>
 	);
 }
-
-
-
