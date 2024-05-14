@@ -7,11 +7,9 @@ function SucessFallback() {
 
 const OnSuccessPage = () => {
 	return (
-		<div>
-			<Suspense fallback={<SucessFallback />}>
-				<SuccessPage />
-			</Suspense>
-		</div>
+		<Suspense fallback={<SucessFallback />}>
+			<SuccessPage />
+		</Suspense>
 	);
 };
 
