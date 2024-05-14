@@ -1,10 +1,10 @@
 import prisma from '@/utils/connect';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
 interface Props {
 	params: { intentId: string };
 }
-export const PUT = async ({ params }: Props) => {
+export const PUT = async (req: NextRequest, { params }: Props) => {
 	const { intentId } = params;
 
 	try {
