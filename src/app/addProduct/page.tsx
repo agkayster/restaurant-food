@@ -64,7 +64,7 @@ const AddNewProduct = () => {
 	const upload = async () => {
 		const data = new FormData();
 
-		/* get our file from state */
+		/* get our file which contains imgage item from state and appends it to data */
 		data.append('file', file!);
 
 		/* upload preset is your cloudinary folder name */
@@ -79,15 +79,17 @@ const AddNewProduct = () => {
 		);
 
 		const resData = await res.json();
+		/* returns the url link for our image */
 		return resData.url;
 	};
 
 	const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const target = e.target as HTMLInputElement;
 
-		/* take the first file which is our image from the list of files */
+		/* take the first file which is our image from the list of files and passes it to item */
 		const item = (target.files as FileList)[0];
 
+		/* sends item to file state */
 		setFile(item);
 	};
 

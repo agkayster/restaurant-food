@@ -100,13 +100,18 @@ const OrdersPage = () => {
 									<td className='py-6 px-1'>
 										{Number(price).toFixed(2)}
 									</td>
-									{products.map(({ title }) => (
-										<td
-											key={title}
-											className='hidden md:block py-6 px-1'>
-											{title}
-										</td>
-									))}
+									{products.map(
+										({ title, quantity, optionTitle }) => (
+											<td
+												key={title}
+												className='hidden md:block py-6 px-1'>
+												{title}
+												<div>
+													{optionTitle} x{quantity}{' '}
+												</div>
+											</td>
+										)
+									)}
 									{session?.user.isAdmin ? (
 										<td>
 											<form

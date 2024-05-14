@@ -81,7 +81,11 @@ const Menu = () => {
 								Orders
 							</Link>
 
-							<span className='cursor-pointer' onClick={() => signOut()}>Logout</span>
+							<span
+								className='cursor-pointer'
+								onClick={() => signOut()}>
+								Logout
+							</span>
 						</div>
 					)}
 					<Link href='/cart' onClick={() => setOpen(false)}>
