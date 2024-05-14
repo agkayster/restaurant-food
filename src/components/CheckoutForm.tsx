@@ -63,7 +63,7 @@ const CheckoutForm = () => {
 			elements,
 			confirmParams: {
 				// Make sure to change this to your payment completion page
-				return_url: 'http://localhost:3000/success',
+				return_url: 'http://localhost:3000/OnSuccessPage',
 			},
 		});
 
@@ -112,7 +112,9 @@ const CheckoutForm = () => {
 				className='bg-red-500 text-white p-4 rounded-md w-28'>
 				<span id='button-text'>
 					{isLoading ? (
-						<div className='spinner text-white' id='spinner'>Processing...</div>
+						<div className='spinner text-white' id='spinner'>
+							Processing...
+						</div>
 					) : (
 						'Pay now'
 					)}
