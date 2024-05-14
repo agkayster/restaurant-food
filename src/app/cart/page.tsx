@@ -70,7 +70,9 @@ const CartPage = () => {
 								</h1>
 								<span>{item.optionTitle}</span>
 							</div>
-							<h2 className='font-bold text-lg'>${item.price}</h2>
+							<h2 className='font-bold text-lg'>
+								${+item.price.toFixed(2)}
+							</h2>
 							<span
 								className='cursor-pointer'
 								onClick={() => removeFromCart(item)}>
