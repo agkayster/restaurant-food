@@ -9,7 +9,7 @@ type Props = {
 };
 
 const getData = async (id: string) => {
-	const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+	const res = await fetch(`http://127.0.0.1:3000/api/products/${id}`, {
 		cache: 'no-store',
 	});
 
@@ -19,6 +19,17 @@ const getData = async (id: string) => {
 
 	return res.json();
 };
+// const getData = async (id: string) => {
+// 	const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+// 		cache: 'no-store',
+// 	});
+
+// 	if (!res.ok) {
+// 		throw new Error('Failed!');
+// 	}
+
+// 	return res.json();
+// };
 
 const SingleProduct = async ({ params }: Props) => {
 	console.log('get params id =>', params);
