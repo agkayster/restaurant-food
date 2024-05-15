@@ -1,6 +1,10 @@
 // import { webpack } from 'next/dist/compiled/webpack/webpack.js';
-const webpack = require('webpack');
+// const webpack = require('webpack');
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+import pkg from 'next/dist/compiled/webpack/webpack.js';
 /** @type {import('next').NextConfig} */
+const { webpack } = pkg;
 const nextConfig = {
 	images: {
 		domains: ['res.cloudinary.com'],
