@@ -1,4 +1,5 @@
-import { webpack } from 'next/dist/compiled/webpack/webpack';
+// import { webpack } from 'next/dist/compiled/webpack/webpack.js';
+const webpack = require('webpack');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
