@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaNeon } from '@prisma/adapter-neon';
 import { Pool } from '@neondatabase/serverless';
 
-// export const runtime = 'edge';
+export const runtime = 'edge';
 
 // WE FETCH ALL THE CATEGORIES FROM PRISMA STUDIO
 

@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaNeon } from '@prisma/adapter-neon';
 import { Pool } from '@neondatabase/serverless';
 
-// export const runtime = 'edge';
+export const runtime = 'edge';
 
 export async function GET(request: Request) {
 	const neon = new Pool({
