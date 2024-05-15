@@ -1,10 +1,11 @@
 // import { webpack } from 'next/dist/compiled/webpack/webpack.js';
-const webpack = require('webpack');
+// const webpack = require('webpack');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	images: {
 		domains: ['res.cloudinary.com'],
 	},
+	reactStrictMode: true,
 	webpack: (config, { isServer }) => {
 		if (!isServer) {
 			config.resolve.fallback = {
