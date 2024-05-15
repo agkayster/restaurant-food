@@ -1,13 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
-import prisma from '@/utils/connect';
+// import prisma from '@/utils/connect';
 import { getAuthSession } from '@/utils/auth';
+import { PrismaClient } from '@prisma/client';
+import { PrismaNeon } from '@prisma/adapter-neon';
+import { Pool } from '@neondatabase/serverless';
 
 // FETCH ALL PRODUCTS
+
+export const runtime = 'edge';
 
 export const GET = async (req: NextRequest) => {
 	const { searchParams } = new URL(req.url);
 
 	const cat = searchParams.get('cat');
+
+	const neon = new Pool({
+		connectionString: process.env.POSTGRES_PRISMA_URL,
+	});
+	const adapter = new PrismaNeon(neon);
+	const prisma = new PrismaClient({ adapter });
 
 	try {
 		const products = await prisma.product.findMany({
@@ -32,6 +43,12 @@ export const GET = async (req: NextRequest) => {
 /* CREATE PRODUCTS */
 export const POST = async (req: NextRequest) => {
 	const session = await getAuthSession();
+
+	const neon = new Pool({
+		connectionString: process.env.POSTGRES_PRISMA_URL,
+	});
+	const adapter = new PrismaNeon(neon);
+	const prisma = new PrismaClient({ adapter });
 
 	/* if user is signed on */
 	if (session) {
