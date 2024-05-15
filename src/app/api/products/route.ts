@@ -7,7 +7,7 @@ import { Pool } from '@neondatabase/serverless';
 
 // FETCH ALL PRODUCTS
 
-export const runtime = 'edge';
+// export const runtime = 'edge';
 
 export const GET = async (req: NextRequest) => {
 	const { searchParams } = new URL(req.url);
