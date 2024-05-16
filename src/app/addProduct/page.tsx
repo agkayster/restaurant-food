@@ -111,17 +111,20 @@ const AddNewProduct = () => {
 			/* pass our "upload" function that has our image url */
 			const url = await upload();
 
-			const res = await fetch('http://localhost:3000/api/products', {
-				method: 'POST',
-				/* converting all the data in our body to string */
-				body: JSON.stringify({
-					/* set our "img" field which is a string in our database to "url" */
-					img: url,
-					...inputs,
-					isFeatured: isFeatured === 'yes' ? true : false,
-					options,
-				}),
-			});
+			const res = await fetch(
+				`${process.env.NEXT_PUBLIC_API_URL}/api/products`,
+				{
+					method: 'POST',
+					/* converting all the data in our body to string */
+					body: JSON.stringify({
+						/* set our "img" field which is a string in our database to "url" */
+						img: url,
+						...inputs,
+						isFeatured: isFeatured === 'yes' ? true : false,
+						options,
+					}),
+				}
+			);
 
 			const data = await res.json();
 			router.push(`/product/${data.id}`);

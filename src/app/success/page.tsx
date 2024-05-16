@@ -15,7 +15,7 @@ const SuccessPage = () => {
 		const makeRequest = async () => {
 			try {
 				await fetch(
-					`http://127.0.0.1:3000/api/confirm/${payment_intent}`,
+					`${process.env.NEXT_PUBLIC_API_URL}/api/confirm/${payment_intent}`,
 					{
 						method: 'PUT',
 					}
