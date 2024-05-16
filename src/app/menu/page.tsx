@@ -3,6 +3,8 @@ import React from 'react';
 import Link from 'next/link';
 import { MenuType } from '@/types/types';
 
+export const dynamic = 'force-dynamic';
+
 const getData = async () => {
 	const res = await fetch(
 		`${process.env.NEXT_PUBLIC_API_URL}/api/categories`,
