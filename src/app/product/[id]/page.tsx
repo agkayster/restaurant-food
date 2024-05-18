@@ -10,17 +10,17 @@ type Props = {
 	params: { id: string };
 };
 
-const getData = async (id: string) => {
-	const res = await fetch(`http://localhost:3000/api/products/${id}`, {
-		cache: 'no-store',
-	});
+// const getData = async (id: string) => {
+// 	const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+// 		cache: 'no-store',
+// 	});
 
-	if (!res.ok) {
-		throw new Error('Failed!');
-	}
+// 	if (!res.ok) {
+// 		throw new Error('Failed!');
+// 	}
 
-	return res.json();
-};
+// 	return res.json();
+// };
 
 const SingleProduct = async ({ params }: Props) => {
 	console.log('get params id =>', params);
