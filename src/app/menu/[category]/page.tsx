@@ -2,28 +2,35 @@ import { ProductType } from '@/types/types';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import prisma from '@/utils/connect';
 
-const getData = async (category: string) => {
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/products?cat=${category}`,
-		{
-			cache: 'no-store',
-		}
-	);
+// const getData = async (category: string) => {
+// 	const res = await fetch(
+// 		`${process.env.NEXT_PUBLIC_API_URL}/api/products?cat=${category}`,
+// 		{
+// 			cache: 'no-store',
+// 		}
+// 	);
 
-	if (!res.ok) {
-		throw new Error('Failed!');
-	}
+// 	if (!res.ok) {
+// 		throw new Error('Failed!');
+// 	}
 
-	return res.json();
-};
+// 	return res.json();
+// };
 
 type Props = {
 	params: { category: string };
 };
 
 const CategoryPage = async ({ params }: Props) => {
-	const productsData: ProductType[] = await getData(params.category);
+	// console.log('get params =>', params);
+	const productsData: ProductType[] = await prisma.product.findMany({
+		where: {
+			catSlug: params.category,
+		},
+	});
+	// const productsData: ProductType[] = await getData(params.category);
 
 	return (
 		<div className='flex flex-wrap text-red-500'>
@@ -47,7 +54,9 @@ const CategoryPage = async ({ params }: Props) => {
 					{/* TEXT */}
 					<div className='h-[20%] flex items-center justify-between font-bold'>
 						<h1 className='text-xl uppercase p-1'>{title}</h1>
-						<h2 className='group-hover:hidden text-xl'>${price}</h2>
+						<h2 className='group-hover:hidden text-xl'>
+							${price.toString()}
+						</h2>
 						<button className='hidden uppercase group-hover:block bg-red-500 text-white p-2 rounded-md'>
 							Add to Cart
 						</button>
