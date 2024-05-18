@@ -3,18 +3,17 @@ import Price from '@/components/Price';
 import { ProductType } from '@/types/types';
 import Image from 'next/image';
 import React from 'react';
+import { singleProduct } from '../../../data';
+import prisma from '@/utils/connect';
 
 type Props = {
 	params: { id: string };
 };
 
 const getData = async (id: string) => {
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`,
-		{
-			cache: 'no-store',
-		}
-	);
+	const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+		cache: 'no-store',
+	});
 
 	if (!res.ok) {
 		throw new Error('Failed!');
@@ -22,21 +21,16 @@ const getData = async (id: string) => {
 
 	return res.json();
 };
-// const getData = async (id: string) => {
-// 	const res = await fetch(`http://localhost:3000/api/products/${id}`, {
-// 		cache: 'no-store',
-// 	});
-
-// 	if (!res.ok) {
-// 		throw new Error('Failed!');
-// 	}
-
-// 	return res.json();
-// };
 
 const SingleProduct = async ({ params }: Props) => {
 	console.log('get params id =>', params);
-	const singleProduct: ProductType = await getData(params?.id);
+
+	const singleProduct: any = await prisma.product.findUnique({
+		where: {
+			id: params?.id,
+		},
+	});
+	// const singleProduct: ProductType = await getData(params?.id);
 	// const {
 	// 	id: singleProdId,
 	// 	title,

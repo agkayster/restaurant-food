@@ -1,22 +1,28 @@
 import React from 'react';
 import Image from 'next/image';
+import prisma from '@/utils/connect';
 
 import { ProductType } from '@/types/types';
 
-const getData = async () => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
-		cache: 'no-store',
-	});
+// const getData = async () => {
+// 	const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`, {
+// 		cache: 'no-store',
+// 	});
 
-	if (!res.ok) {
-		throw new Error('Failed!');
-	}
+// 	if (!res.ok) {
+// 		throw new Error('Failed!');
+// 	}
 
-	return res.json();
-};
+// 	return res.json();
+// };
 
 export default async function FeaturedItems() {
-	const featuredProducts: ProductType[] = await getData();
+	const featuredProducts: ProductType[] = await prisma.product.findMany({
+		where: {
+			isFeatured: true,
+		},
+	});
+	// const featuredProducts: ProductType[] = await getData();
 
 	return (
 		<div className='w-screen overflow-x-scroll text-red-500'>
@@ -47,7 +53,7 @@ export default async function FeaturedItems() {
 								</h1>
 								{desc && <p className='p-1'>{desc}</p>}
 								<span className='text-lg font-bold'>
-									${price}
+									${price.toString()}
 								</span>
 								{/* BUTTON */}
 								<button className='bg-red-500 text-white p-2 rounded-md'>
