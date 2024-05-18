@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { MenuType } from '@/types/types';
 import prisma from '@/utils/connect';
 
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
 
 const getData = async () => {
 	const res = await prisma.category.findMany();
