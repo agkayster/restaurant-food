@@ -44,7 +44,7 @@ const SingleProduct = async ({ params }: Props) => {
 		<div className='p-4 lg:px-20 xl:px-40 h-screen flex flex-col justify-around text-red-500 md:flex-row md:gap-8 md:items-center relative'>
 			<DeleteButton id={singleProduct.id} />
 			{/* IMAGE */}
-			<div className='relative h-1/2 w-full md:h-[70%] md:w-1/2'>
+			<div className='relative h-1/2 w-full z-10 md:h-[70%] md:w-1/2'>
 				{singleProduct.img && (
 					<Image
 						src={singleProduct.img}
