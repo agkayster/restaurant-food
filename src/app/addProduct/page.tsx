@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
-import prisma from '@/utils/connect';
+// import prisma from '@/utils/connect';
 
 type OptionType = {
 	title: string;
