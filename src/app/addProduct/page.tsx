@@ -3,6 +3,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import prisma from '@/utils/connect';
 
 type OptionType = {
 	title: string;
@@ -104,6 +105,7 @@ const AddNewProduct = () => {
 		setIsFeatured(e.target.value as any);
 	};
 
+	/* only user that is admin can create product */
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
