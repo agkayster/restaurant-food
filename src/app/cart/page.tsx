@@ -40,7 +40,9 @@ const CartPage = () => {
 					}
 				);
 				const data = await res.json();
-				router.push(`/pay/${data.id}`);
+				router.push(
+					`${process.env.NEXT_PUBLIC_API_URL}/pay/${data.id}`
+				);
 			} catch (error) {
 				console.log('get checkout error =>', error);
 			}
