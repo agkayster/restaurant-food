@@ -25,17 +25,20 @@ const CartPage = () => {
 			router.push('/');
 		} else {
 			try {
-				const res = await fetch('http://127.0.0.1:3000/api/orders', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					/* pass our data using body */
-					body: JSON.stringify({
-						price: totalPrice,
-						products,
-						status: 'Not paid',
-						userEmail: session.user.email,
-					}),
-				});
+				const res = await fetch(
+					`${process.env.NEXT_PUBLIC_API_URL}/api/orders`,
+					{
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						/* pass our data using body */
+						body: JSON.stringify({
+							price: totalPrice,
+							products,
+							status: 'Not paid',
+							userEmail: session.user.email,
+						}),
+					}
+				);
 				const data = await res.json();
 				router.push(`/pay/${data.id}`);
 			} catch (error) {
