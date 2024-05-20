@@ -102,7 +102,7 @@ const AddNewProduct = () => {
 	const handleIsFeaturedChange = (
 		e: React.ChangeEvent<HTMLSelectElement>
 	) => {
-		setIsFeatured(e.target.value as any);
+		setIsFeatured(e.target.value as string);
 	};
 
 	/* only user that is admin can create product */
