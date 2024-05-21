@@ -24,9 +24,10 @@ const PayPage = ({ params }: { params: { id: string } }) => {
 					}
 				);
 				const data = await res.json();
+				console.log('get client secret =>', data.clientSecret);
 				setClientSecret(data.clientSecret);
 			} catch (err) {
-				console.log(err);
+				console.log("check error =>",err);
 			}
 		};
 

@@ -7,24 +7,24 @@ import prisma from '@/utils/connect';
 // export const dynamic = 'force-dynamic';
 
 const getData = async () => {
-	const res = await prisma.category.findMany();
+	// const res = await prisma.category.findMany();
 
-	if (!res) {
-		throw new Error('Failed!');
-	}
-	return res;
-	// const res = await fetch(
-	// 	`${process.env.NEXT_PUBLIC_API_URL}/api/categories`,
-	// 	{
-	// 		cache: 'no-store',
-	// 	}
-	// );
-
-	// if (!res.ok) {
+	// if (!res) {
 	// 	throw new Error('Failed!');
 	// }
+	// return res;
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_API_URL}/api/categories`,
+		{
+			cache: 'no-store',
+		}
+	);
 
-	// return res.json();
+	if (!res.ok) {
+		throw new Error('Failed!');
+	}
+
+	return res.json();
 };
 
 const MenuPage = async () => {
