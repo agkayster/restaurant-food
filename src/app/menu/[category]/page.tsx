@@ -4,20 +4,20 @@ import Link from 'next/link';
 import React from 'react';
 import prisma from '@/utils/connect';
 
-// const getData = async (category: string) => {
-// 	const res = await fetch(
-// 		`${process.env.NEXT_PUBLIC_API_URL}/api/products?cat=${category}`,
-// 		{
-// 			cache: 'no-store',
-// 		}
-// 	);
+const getData = async (category: string) => {
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_API_URL}/api/products?cat=${category}`,
+		{
+			cache: 'no-store',
+		}
+	);
 
-// 	if (!res.ok) {
-// 		throw new Error('Failed!');
-// 	}
+	if (!res.ok) {
+		throw new Error('Failed!');
+	}
 
-// 	return res.json();
-// };
+	return res.json();
+};
 
 type Props = {
 	params: { category: string };
@@ -25,12 +25,12 @@ type Props = {
 
 const CategoryPage = async ({ params }: Props) => {
 	// console.log('get params =>', params);
-	const productsData: ProductType[] = await prisma.product.findMany({
-		where: {
-			catSlug: params.category,
-		},
-	});
-	// const productsData: ProductType[] = await getData(params.category);
+	// const productsData: ProductType[] = await prisma.product.findMany({
+	// 	where: {
+	// 		catSlug: params.category,
+	// 	},
+	// });
+	const productsData: ProductType[] = await getData(params.category);
 
 	return (
 		<div className='flex flex-wrap text-red-500'>
