@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'BlueFlame Restaurant',
+	title: 'Food portal',
 	description: 'Come and enjoy!',
 };
 
