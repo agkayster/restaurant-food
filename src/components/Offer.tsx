@@ -17,9 +17,7 @@ function OfferComponent() {
 					Delicious Burger & French Fry
 				</h1>
 				<p className='text-white lg:text-xl'>
-					Progressively simplify effective e-toilers and
-					process-centric methods of empowerment. Quickly pontificate
-					parallel.
+					Our hot sizzling, delicious burgers and french fries are running out fast. Grab your share.
 				</p>
 				<CountDown />
 				<Link href='/menu'>
