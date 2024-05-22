@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import prisma from '@/utils/connect';
+// import prisma from '@/utils/connect';
+import Link from 'next/link';
 
 import { ProductType } from '@/types/types';
 
@@ -31,7 +32,8 @@ export default async function FeaturedItems() {
 				{/* SINGLE ITEMS */}
 				{featuredProducts.map(
 					({ id, title, desc, img, price, options }) => (
-						<div
+						<Link
+							href={`/product/${id}`}
 							key={id}
 							className='w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50
               transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh]'>
@@ -60,7 +62,7 @@ export default async function FeaturedItems() {
 									Add to Cart
 								</button>
 							</div>
-						</div>
+						</Link>
 					)
 				)}
 			</div>

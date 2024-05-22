@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 // import CountDown from './CountDown';
 
 const CountDown = dynamic(() => import('./CountDown'), {
@@ -21,9 +22,11 @@ function OfferComponent() {
 					parallel.
 				</p>
 				<CountDown />
-				<button className='bg-red-500 text-white rounded-md py-3 px-6'>
-					Order Now
-				</button>
+				<Link href='/menu'>
+					<button className='bg-red-500 text-white rounded-md py-3 px-6'>
+						Order Now
+					</button>
+				</Link>
 			</div>
 			{/* IMAGE */}
 			<div className='relative flex-1 w-full md:h-full'>

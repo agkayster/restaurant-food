@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 };
 
 function SucessFallback() {
-	return <>Success Page</>;
+	return <>Loading...</>;
 }
 
 export default function RootLayout({
