@@ -136,6 +136,7 @@ const AddNewProduct = () => {
 	};
 
 	console.log('get is feature =>', isFeatured);
+	console.log('get is not feature =>', isFeatured);
 
 	return (
 		<div className='p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center text-red-500'>
