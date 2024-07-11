@@ -110,7 +110,7 @@ export const useCartStore = create(
 			removeFromCart(item) {
 				set((state) => ({
 					products: state.products.filter(
-						(product) => product.optionTitle !== item.optionTitle
+						(product) => product.price !== item.price
 					),
 					totalItems: state.totalItems - item.quantity, // => once item is removed, reduce total items
 					totalPrice: state.totalPrice - item.price, // => once item is removed, reduce total price
